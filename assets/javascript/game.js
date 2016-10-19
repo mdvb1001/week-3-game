@@ -4,12 +4,61 @@
 var options = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 var choices = ['homealone', 'diehard', 'blade', 'taken', 'conair', 'therock', 'rambo', 'predator'];
 var chosenWord = choices[Math.floor(Math.random() * choices.length) + 0];
-var word1 = '';
 var numberOfGuesses = 12; 
-var wins = 0;
+var success = 0;
 function lettersAlreadyGuessed(userGuess) {
 		console.log(userGuess)
 	};
+
+
+
+document.onkeyup = function(event) {
+  var chosenWord = choices[Math.floor(Math.random() * choices.length) + 0];
+  console.log(chosenWord);
+
+	  	document.onkeyup = function(event) {
+		var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+		
+		if (options.indexOf(userGuess) === -1) {
+			console.log('Please type in a letter only!');
+		}
+		else if (options.indexOf(userGuess) < options.length) {}; 
+
+		if (chosenWord.indexOf(userGuess) === -1) {
+			numberOfGuesses--;
+			console.log(userGuess);
+			console.log('Nope!');
+
+		}
+		else if (chosenWord.indexOf(userGuess) < chosenWord.length) {
+			numberOfGuesses--;
+			success++;
+			console.log('Nice!');
+		}; 
+		console.log('Number of Guesses Remaining ' + numberOfGuesses);
+
+		if (success === chosenWord.length) {
+			console.log('You got the WERD!!');
+		};
+
+		if (numberOfGuesses <= 0) {
+			console.log('You LOST!!!!!!!');
+		};
+
+		var letterIndex = chosenWord.indexOf(userGuess);
+
+		if (chosenWord.charAt(letterIndex) === userGuess) {
+			console.log(userGuess);
+			var PrintLetter = document.getElementById("results");
+			 	var newPrintLetter = document.createElement('p');
+			 	newPrintLetter.innerHTML = userGuess;
+			 	PrintLetter.appendChild(newPrintLetter)
+
+		};
+	
+	}
+
+};
 
 
 // document.onkeyup
@@ -25,50 +74,7 @@ function lettersAlreadyGuessed(userGuess) {
 // ******
 
 
-document.onkeyup = function(event) {
-
-	var fired = false;
-
-	element.onkeyup = function(event) {
-    	if(!fired) {
-        	fired = true;
-        	console.log(chosenWord);
-        // do something
-    	}
-	};
-
-	element.onkeyup = function(event) {
-    	fired = false;
-	};
-
-
-
-	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-	
-	if (options.indexOf(userGuess) === -1) {
-		console.log("Please type in a letter only!");
-	}
-	else if (options.indexOf(userGuess) < options.length) {
-		console.log(userGuess);
-	}
-
-
-
-
-
-	// if (word1.indexOf(userGuess) === -1) {
-	// 	numberOfGuesses--;
-	// 	console.log(userGuess);
-
-
-	// }
-	// else if (word1.indexOf(userGuess) < word1.length) {
-	// 	numberOfGuesses--;
-	// 	lettersAlreadyGuessed();
-	// 	console.log(userGuess);
-	// } 
-	// console.log('Number of Guesses Remaining ' + numberOfGuesses);
-	
-};
 
 	
+    
+  	
