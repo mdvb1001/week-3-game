@@ -50,13 +50,13 @@ document.onkeyup = function(event) {
 		if (chosenWord.charAt(letterIndex) === userGuess) {
 			console.log(userGuess);
 
-			document.getElementById('currentWord').innerHTML="<h1>" + "_" + userGuess + "_" + "</h1>";
+			// document.getElementById('currentWord').innerHTML="<h1>" + "_" + userGuess + "_" + "</h1>";
 
 
-			// var PrintLetter = document.getElementById('results');
-			//  	var newPrintLetter = document.createElement('p');
-			//  	newPrintLetter.innerHTML ="<h1>" + "Current Word:" + " " + userGuess + "</h1>";
-			//  	PrintLetter.appendChild(newPrintLetter)
+			var PrintLetter = document.getElementById('results');
+			 	var newPrintLetter = document.createElement('p');
+			 	newPrintLetter.innerHTML ="<h1>" + "Current Word:" + " " + userGuess + "</h1>";
+			 	PrintLetter.appendChild(newPrintLetter)
 			
 
 			//var theWordFirst = chosenWord.toString('');
