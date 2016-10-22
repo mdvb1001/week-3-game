@@ -13,23 +13,39 @@ var progress = [];
 var userGuess = "";
 
 
-function initializeGame() {
-	document.onkeyup = function(event) {
+
+document.onkeyup = function(event) {
+	if (guessesRemaining === 12) {
+    	chooseWord();
+    	handleUserGuess(event);   	
+  } else if (correctGuess === chosenWord.length || (guessesRemaining <= 0)) {
+   	 	playGame();
+  } else {
+    	handleUserGuess(event);
+  }
+};
+
+
+function handleUserGuess(event) {
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-	}
+	
 	if (options.indexOf(userGuess) === -1) {
 				console.log('Please type in a letter only!')
 			}
 	else if (options.indexOf(userGuess) < options.length) {
+			playGame();
 			}
 };
 
 // function that Starts and Resets game + Pushes the letters from chosenWord to the array `letters`
-function playGame() {
+function chooseWord() {
 	chosenWord = choices[Math.floor(Math.random() * choices.length) + 0];
   	console.log(chosenWord);
-	guessesRemaining = 12;
+  	guessesRemaining = 12;
 	correctGuess = 0;
+ };
+
+ function playGame() {	
 	for (var i = 0; i < chosenWord.length; i++) {
   		letters.push('');
   		progress.push('');
