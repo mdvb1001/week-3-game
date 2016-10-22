@@ -1,12 +1,15 @@
 
 
 var options = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-var choices = ['crash', 'bladerunner', 'jerassicworld', 'diehard', 'blade', 'taken', 'conair', 'therock', 'rambo', 'predator', 'heat', ''];
-var numberOfGuesses = 12; 
+var choices = ['crash', 'bladerunner', 'jerassic', 'diehard', 'blade', 'taken', 'conair', 'therock', 'rambo', 'predator', 'heat', 'rocky'];
+var guessesRemaining = 12; 
 var chosenWord = "";
 var wins = "";
 var correctGuess = 0;
-var gamePiece = [];
+var correctLetters = [];
+var incorrectLetters = [];
+var letters = [];
+var progress = [];
 var userGuess = "";
 
 
@@ -15,89 +18,132 @@ function initializeGame() {
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 	}
 	if (options.indexOf(userGuess) === -1) {
-				console.log('Please type in a letter only!');
+				console.log('Please type in a letter only!')
 			}
 	else if (options.indexOf(userGuess) < options.length) {
-			}; 
+			}
 };
 
-
-function startGame() {
+// function that Starts and Resets game + Pushes the letters from chosenWord to the array `letters`
+function playGame() {
 	chosenWord = choices[Math.floor(Math.random() * choices.length) + 0];
   	console.log(chosenWord);
-	numberOfGuesses = 12;
+	guessesRemaining = 12;
 	correctGuess = 0;
 	for (var i = 0; i < chosenWord.length; i++) {
-  		gamePiece.push('_ ')
-	};
-
-	document.getElementById('currentWord').innerHTML=gamePiece.join('');
-
-	if (correctGuess === chosenWord.length) {
-					console.log('You got the WERD!!');
-					wins++;
-					startGame();
-				};
-
-	else if (numberOfGuesses <= 0) {
-					console.log('You LOST!!!!!!!');
-					startGame();
-				};
-
-};
-
-
-function printCorrectGuesses () {
-	for (var i = 0; i < gamePiece.length; i++) {
-  	document.getElementById('currentWord').innerHTML=gamePiece[i];
-  }
-};
-
-
-function matchGuesses () {
-	for (var i = 0; i < chosenWord.length; i++) {
-  		if (chosenWord[i] === userGuess) {
-    		gamePiece[i] = userGuess;
-    		correctGuess++;
-    		printUserGuesses();
-
-  		}
-  		else if (chosenWord[i] != userGuess) {
-  			numberOfGuesses--;
-  		}
+  		letters.push('');
+  		progress.push('');
+  		console.log(letters);
+  		console.log(letters);
 	}
-};
-
-
-initializeGame();
-startGame();
-matchGuesses();
 
 
 
-
-document.onkeyup = function(event) {
-
-	  		document.onkeyup = function(event) {
-				var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-			if (options.indexOf(userGuess) === -1) {
-				console.log('Please type in a letter only!');
-			}
-			else if (options.indexOf(userGuess) < options.length) {
-			}; 
-
-
-			if (chosenWord.indexOf(userGuess) === -1) {
-				numberOfGuesses--;
+	if (chosenWord.indexOf(userGuess) === -1) {
+				guessesRemaining--;
 				console.log(userGuess);
 				console.log('Nope!');
 			}
 			else if (chosenWord.indexOf(userGuess) < chosenWord.length) {
 				correctGuess++;
 				console.log('Nice!');
-				printUserGuesses();
-			}; 
-			console.log('Number of Guesses Remaining ' + numberOfGuesses);
+			} 
+			console.log('Number of Guesses Remaining ' + guessesRemaining);
+
+	if (correctGuess === chosenWord.length) {
+			console.log('You got the WERD!!');
+			wins++;
+			playGame();
+			}
+
+	if (guessesRemaining <= 0) {
+			console.log('You LOST!!!!!!!');
+			playGame();
+			}
+
+};
+
+// function that stores the CORRECT LETTERS into an array called `correctLetters`
+function pushCorrectLetters() {
+	if (chosenword.indexof(userGuess) != -1) {
+			correctLetters.push('');
+			console.log(correctLetters);
+	}
+	else {
+			incorrectLetters.push('');
+			console.log(incorrectLetters);
+	}
+	
+};
+
+function progressUpdate() {
+    for (var k = 0; k < letters.length; k++) {
+        if (lettersCorrect.indexOf(letters[k]) !== -1) {
+                progress[k] = letters[k];
+        } else {
+                progress[k] = '_';
+        }
+ 	}
+};
+
+function print() {
+	document.getElementById('currentWord').innerHTML=progress.join('');
+	document.getElementById('lettersUsed').innerHTML=incorrectLetters.join('');
+	document.getElementById('guessesLeft').innerHTML=guessesRemaining;
+	document.getElementById('wins').innerHTML=wins;
+	};
+
+// function printCorrectGuesses() {
+// 	for (var i = 0; i < letters.length; i++) {
+//   	document.getElementById('currentWord').innerHTML=letters[i];
+//   }
+// };
+
+// function printIncorrectGuesses() {
+// 	document.getElementById('currentWord').innerHTML = letters.join('');
+// };
+
+
+// function matchGuesses() {
+// 	for (var i = 0; i < chosenWord.length; i++) {
+//   		if (chosenWord[i] === userGuess) {
+//     		letters[i] = userGuess;
+//     		correctGuess++;
+
+//   		}
+//   		else if (chosenWord[i] != userGuess) {
+//   			guessesRemaining--;
+//   		}
+// 	}
+// };
+
+
+
+
+
+
+
+// document.onkeyup = function(event) {
+
+// 	  	document.onkeyup = function(event) {
+// 				var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+// 			if (options.indexOf(userGuess) === -1) {
+// 				console.log('Please type in a letter only!');
+// 			}
+// 			else if (options.indexOf(userGuess) < options.length) {
+// 			}
+
+
+// 			if (chosenWord.indexOf(userGuess) === -1) {
+// 				guessesRemaining--;
+// 				console.log(userGuess);
+// 				console.log('Nope!');
+// 			}
+// 			else if (chosenWord.indexOf(userGuess) < chosenWord.length) {
+// 				correctGuess++;
+// 				console.log('Nice!');
+// 			} 
+// 			console.log('Number of Guesses Remaining ' + guessesRemaining);
 
 
 
@@ -124,14 +170,14 @@ document.onkeyup = function(event) {
 			// 	resetGame();
 			// };
 
-	  // 		if (numberOfGuesses <= 0) {
+	   		// if (guessesRemaining <= 0) {
 			// 	console.log('You LOST!!!!!!!');
 			// 	resetGame();
 			// };
 	
-		}
+	// 	}
 
-	};
+	// };
 
 
 // document.onkeyup
